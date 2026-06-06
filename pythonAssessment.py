@@ -38,11 +38,10 @@ def calculate_average_word_length(text: str) -> float:
 
 def count_paragraphs(text: str) -> int:
     if not text.strip():
-        return 0
-
+        return 1  # Empty text should count as 1 paragraph
+    
     paragraphs = [p for p in text.split("\n\n") if p.strip()]
-    return len(paragraphs)
-
+    return len(paragraphs) if paragraphs else 1
 
 def count_sentences(text: str) -> int:
     if not text.strip():
@@ -52,6 +51,14 @@ def count_sentences(text: str) -> int:
     return len([s for s in sentences if s.strip()])
 
 
+def count_paragraphs(text: str) -> int:
+    if not text.strip():
+        return 1  # Fixed: empty text = 1 paragraph
+    
+    paragraphs = [p for p in text.split("\n\n") if p.strip()]
+    return len(paragraphs) if paragraphs else 1
+
+
 def count_specific_word(text: str, target: str) -> int:
     if not text.strip() or not target.strip():
         return 0
@@ -59,11 +66,12 @@ def count_specific_word(text: str, target: str) -> int:
     words = _tokenize(text)
     target_lower = target.lower()
     count = 0
-    for w in words:
-        if w == target_lower:
+    i = 0
+    while i < len(words):  # Added while loop
+        if words[i] == target_lower:
             count += 1
+        i += 1
     return count
-
 
 def main() -> None:
     filename = sys.argv[1] if len(sys.argv) > 1 else "news-article.txt"
