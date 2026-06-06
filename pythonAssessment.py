@@ -1,3 +1,5 @@
+import re
+
 def identify_most_common_word(text):
     if text.strip() == "":
         return None
@@ -51,6 +53,14 @@ def count_sentences(text):
         return 1
     sentences = re.split(r'[.!?]+', text)
     return len([s for s in sentences if s.strip()])
+
+
+def count_specific_word(text, word):
+    """Count occurrences of word in text (case-insensitive, whole words)."""
+    if text is None or word is None:
+        return 0
+    pattern = r"\b" + re.escape(word) + r"\b"
+    return len(re.findall(pattern, text, flags=re.IGNORECASE))
 
 
 file = open("news-article.txt", "r", encoding="utf-8")
