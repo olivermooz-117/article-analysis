@@ -85,4 +85,5 @@ def main() -> None:
         print(calculate_average_word_length(article))
         print(count_sentences(article))
         print(count_paragraphs(article))
-if __name__ == "__main__":    main()
+if __name__ == "__main__":   
+    main()
