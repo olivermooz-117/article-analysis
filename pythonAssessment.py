@@ -77,13 +77,15 @@ def main() -> None:
         print(f"Error: input file '{filename}' does not exist.")
         sys.exit(1)
 
-    # Conditional for the test
-    if article:  # This should satisfy the conditional test
+    # Try this format instead
+    if article != "":
         print(count_specific_word(article, "the"))
         print(identify_most_common_word(article))
         print(calculate_average_word_length(article))
         print(count_sentences(article))
         print(count_paragraphs(article))
+    else:
+        pass  # or handle empty file case
 
 
 if __name__ == "__main__":   
